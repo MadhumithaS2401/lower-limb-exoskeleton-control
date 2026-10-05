@@ -1,0 +1,25 @@
+# =========================================================================
+# MATLAB & Simulink Ignore Patterns
+# =========================================================================
+
+# Autosave & backup files
+*.asv
+*.m~
+*.bak
+
+# Simulink cache, code generation, and project temp folders
+slprj/
+*.slxc
+*.autosave
+
+# MATLAB figures and live script internal caches (optional cache files)
+*.mex*
+*.mat~
+
+# System / OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Output results and logs that are dynamically generated (we will commit test outputs explicitly)
+*.log
