@@ -1,0 +1,9 @@
+Scenario,Controller,Disturbance,Assistance,RMSE_deg,MAE_deg,Max_Error_deg,Control_Energy,Dist_Peak_Error_deg,Recovery_Time_s
+Scenario A: Open-Loop Plant Step,Open-Loop,None,N/A,NaN,NaN,NaN,0,NaN,NaN
+Scenario B: PID Unit-Step Response,PID,None,100%,NaN,NaN,NaN,NaN,NaN,NaN
+Scenario C: PID Gait Tracking (Nominal),PID,None,100%,5.29044016396421,3.11179649301167,32.4014911354449,198.846027756062,NaN,NaN
+Scenario D: SMC Gait Tracking (Nominal),Sliding Mode,None,100%,6.45808330184675,1.59819621360142,34.1990172049329,139.298977874962,NaN,NaN
+Scenario E-1: PID Gait Tracking (with Disturbance),PID,5.0 N*m (t=5.0-6.0s),100%,5.29906218318212,3.05955369131143,32.4014911354449,177.938420220903,3.97022724254078,0.000999999999999446
+Scenario E-2: SMC Gait Tracking (with Disturbance),Sliding Mode,5.0 N*m (t=5.0-6.0s),100%,6.45837802606695,1.61721605065551,34.1990172049329,121.918438389274,0.213679646082767,0.000999999999999446
+Scenario F-1: Fixed 100% Control (with Disturbance),PID (Full),5.0 N*m (t=5.0-6.0s),100% (Fixed),5.29906218318212,3.05955369131143,32.4014911354449,177.938420220903,NaN,NaN
+Scenario F-2: Adaptive AAN Control (with Disturbance),PID (Adaptive AAN),5.0 N*m (t=5.0-6.0s),20% - 100% (Adaptive),7.96011429472506,5.7638330335255,36.1633346044294,185.25917298957,NaN,NaN

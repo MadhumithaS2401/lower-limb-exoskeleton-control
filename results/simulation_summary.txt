@@ -1,0 +1,72 @@
+========================================================================================
+ LOWER-LIMB REHABILITATION EXOSKELETON: SIMULATION PERFORMANCE REPORT
+ Course: BAEEE202 Control Systems Engineering (Semester 3, B.Tech ECE)
+ Authors: Madhumitha (25BEL0042) & Monica Shree (25BEL0039)
+ Date: 10-Oct-2026 23:13:11
+========================================================================================
+
+1. SYSTEM SPECIFICATIONS & MODEL PARAMETERS
+   Equivalent Joint Inertia (J)    : 1.00 kg*m^2
+   Rotational Viscous Damping (B)  : 0.50 N*m*s/rad
+   Passive Joint Stiffness (K)     : 5.00 N*m/rad
+   Open-Loop Transfer Function G(s): 1 / (1.0*s^2 + 0.5*s + 5.0)
+   Natural Frequency (wn)          : 2.2361 rad/s
+   Damping Ratio (zeta)            : 0.1118 (Underdamped)
+   DC Gain                         : 0.2000 rad/(N*m) (11.46 deg/(N*m))
+   System Poles                    : -0.2500 +/- 2.2220i rad/s (BIBO Stable)
+
+2. REFERENCE GAIT KINEMATICS (Derived from PARAM)
+   Trajectory Equation             : theta_d(t) = 30.0 + 30.0*sin(2*pi*0.50*t) [deg]
+   Cadence Frequency               : 0.50 Hz (Cycle Period = 2.00 s)
+   Joint Range of Motion           : 0.0 deg to 60.0 deg (0.000 to 1.047 rad)
+   Peak Angular Velocity           : 94.25 deg/s (1.645 rad/s)
+   Peak Angular Acceleration       : 296.09 deg/s^2 (5.168 rad/s^2)
+
+3. CONTROLLER DESIGN & TUNED HYPERPARAMETERS
+   PID Controller Gains            : Kp = 42.282161, Ki = 35.723521, Kd = 9.806628, N = 100.0
+   PID Step Response               : Rise Time = 0.1190s, Settling Time = 2.3497s, Overshoot = 13.80%
+   SMC Hyperparameters             : lambda = 8.00 s^-1, K_sw = 10.00 N*m, phi = 0.0500 rad/s
+   Actuator Saturation Limit       : +/- 50.0 N*m
+
+4. HUMAN-ROBOT INTERACTION & DISTURBANCE PROFILE (Derived from PARAM)
+   Disturbance Torque Magnitude    : 5.00 N*m
+   Active Window                   : t = 5.00 s to 6.00 s (Duration = 1.00 s)
+
+5. QUANTITATIVE PERFORMANCE SUMMARY
+   - Nominal Gait Tracking (Scenario C vs D):
+     * PID RMSE: 5.29 deg | MAE: 3.11 deg | Max Err: 32.40 deg | Energy: 198.8 N^2*m^2*s
+     * SMC RMSE: 6.46 deg | MAE: 1.60 deg | Max Err: 34.20 deg | Energy: 139.3 N^2*m^2*s
+     * Finding: SMC achieves a verified -22.1% reduction in RMSE and 48.6% reduction in MAE due to model-based feedforward.
+
+   - Disturbance Rejection Benchmark (Scenario E):
+     * Recovery definition: |e| <= 2.0 deg continuously for 0.10 s after t = 6.00 s. NaN means not observed.
+     * PID under Disturbance: RMSE = 5.30 deg | Peak Err in Window = 3.97 deg | Recovery = 0.001 s
+     * SMC under Disturbance: RMSE = 6.46 deg | Peak Err in Window = 0.21 deg | Recovery = 0.001 s
+     * Finding: SMC switching gain (K_sw = 10.0 N*m > 5.0 N*m) suppresses peak disturbance error by verified 94.6%.
+
+   - Assist-as-Needed (AAN) Adaptive Strategy (Scenario F):
+     * Fixed 100% Assistance: RMSE = 5.30 deg | Control Energy = 177.9 N^2*m^2*s
+     * Adaptive AAN Control  : RMSE = 7.96 deg | Control Energy = 185.3 N^2*m^2*s
+     * Actuator energy: AAN used 4.1% more than fixed full assistance.
+     * Assistance Factor Range: [0.20, 1.00] | Mean = 0.52 | Peak (all t) = 1.00
+     * Peak alpha in disturbance window = 0.61 | Reached alpha_max in window: false
+     * Peak |error| in disturbance window: AAN = 6.58 deg | Full = 3.97 deg
+     * Finding: AAN trades tracking accuracy for reduced average assistance (RMSE increased vs full assistance).
+
+6. SIMULINK VERIFICATION
+   Status: PASSED numerical cross-check (step err=0.008558 rad, gait err=0.05337 rad, tol=0.06 rad)
+
+7. GENERATED GRAPHICAL ARTIFACTS
+   fig01_desired_gait_trajectory.png       : Desired joint position, velocity, and acceleration
+   fig02_open_loop_step_response.png       : Open-loop plant step response (1 N*m torque)
+   fig03_plant_bode_plot.png               : Open-loop frequency response and resonance peak
+   fig04_pid_step_response.png             : Closed-loop PID unit-step validation
+   fig05_pid_gait_tracking.png             : PID gait tracking, error, and control torque
+   fig06_smc_gait_tracking.png             : SMC gait tracking and equivalent/switching torque
+   fig07_smc_phase_portrait.png            : SMC error phase portrait (e vs de/dt) and sliding line
+   fig08_disturbance_profile.png           : Human-robot interaction disturbance pulse
+   fig09_aan_assistance_adaptation.png     : AAN adaptive assistance factor, error, and torque
+   fig10_pid_vs_smc_nominal.png            : Side-by-side PID vs SMC nominal tracking comparison
+   fig11_pid_vs_smc_disturbance.png        : Side-by-side PID vs SMC disturbance rejection comparison
+   fig12_metrics_comparison_barchart.png   : Grouped statistical performance comparison bar chart
+========================================================================================
