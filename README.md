@@ -5,10 +5,10 @@
 [![Course](https://img.shields.io/badge/Course-BAEEE202%20Control%20Systems-green.svg)]()
 [![Status](https://img.shields.io/badge/Simulation-Verified%20%26%20Reproducible-brightgreen.svg)]()
 
-**Course Code:** BAEEE202 – Control Systems (Semester 3, B.Tech ECE)  
-**Authors:** Madhumitha (25BEL0042) & Monica Shree (25BEL0039)  
+  
+**Author:** Madhumitha (25BEL0042)   
 **Repository:** [MadhumithaS2401/lower-limb-exoskeleton-control](https://github.com/MadhumithaS2401/lower-limb-exoskeleton-control)  
-**Academic Weightage:** 30 Marks  
+  
 
 ---
 
